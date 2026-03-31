@@ -1,0 +1,2 @@
+Ovdje ubacite sliku Company Wall sertifikata (npr. company-wall.jpg).
+Zatim u fajlu src/components/CompanyWall.tsx ažurirajte putanju do slike.

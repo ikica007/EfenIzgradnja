@@ -1,0 +1,2 @@
+Ovdje ubacite slike za slajder (npr. 1.jpg, 2.jpg, 3.jpg...).
+Zatim u fajlu src/components/ImageSlider.tsx ažurirajte niz slika sa tačnim imenima vaših fajlova.
