@@ -5,8 +5,8 @@ import { useContent } from '../hooks/useContent';
 
 export default function Footer() {
     const address = 'Bulevar Pera Ćetkovića 115, Podgorica, Crna Gora';
-    const phone = '+382 69 123 456';
-    const email = 'efenizgradnja@gmail.com';
+    const phone = '069 170 627';
+    const email = 'efencolor@gmail.com';
 
   return (
     <footer className="relative z-10 bg-[#111] text-white pt-16 pb-8">
