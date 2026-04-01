@@ -10,12 +10,14 @@ const categoryIcons: Record<string, ReactNode> = {
   "Unutrašnje boje": <PaintBucket className="w-5 h-5" />,
   "Dekorativni materijali": <Droplets className="w-5 h-5" />,
   "Epoxy i industrija": <Zap className="w-5 h-5" />,
+  "Hidroizolacija": <Bath className="w-5 h-5" />,
   "Hidroizolacije": <Bath className="w-5 h-5" />,
   "Suva gradnja": <DoorOpen className="w-5 h-5" />,
   "Alati i oprema": <Wrench className="w-5 h-5" />,
   "Fasaderski radovi": <PaintBucket className="w-5 h-5" />,
   "Dekorativni radovi": <Droplets className="w-5 h-5" />,
   "Hidroizolaciski radovi": <Bath className="w-5 h-5" />,
+  "Hidroizolacija i podovi": <Bath className="w-5 h-5" />,
 };
 
 interface Props {
