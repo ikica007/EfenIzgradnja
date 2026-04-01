@@ -4,11 +4,9 @@ import ContactMap from './ContactMap';
 import { useContent } from '../hooks/useContent';
 
 export default function Footer() {
-  const content = useContent('contact', {
-    address: 'Bul. Crnogorskih Junaka br. 100, 81250 Cetinje, Crna Gora',
-    phone: '069 170 627',
-    email: 'info@efenizgradnja.me'
-  });
+    const address = 'Bulevar Pera Ćetkovića 115, Podgorica, Crna Gora';
+    const phone = '+382 69 123 456';
+    const email = 'efenizgradnja@gmail.com';
 
   return (
     <footer className="relative z-10 bg-[#111] text-white pt-16 pb-8">
@@ -36,7 +34,7 @@ export default function Footer() {
               <a href="https://www.facebook.com/share/1DvkS688mN/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#f05a28] transition-colors">
                 <Facebook className="w-6 h-6" />
               </a>
-              <a href={`mailto:${content.email}`} className="text-gray-400 hover:text-[#f05a28] transition-colors" title="Pošaljite nam email">
+              <a href={`mailto:${email}`} className="text-gray-400 hover:text-[#f05a28] transition-colors" title="Pošaljite nam email">
                 <Mail className="w-6 h-6" />
               </a>
             </div>
@@ -47,15 +45,27 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 text-[#f05a28] mr-3 shrink-0 mt-0.5" />
-                <span className="text-gray-300">{content.address}</span>
+                <span className="text-gray-300">{address}</span>
               </li>
               <li className="flex items-center">
                 <Phone className="w-5 h-5 text-[#f05a28] mr-3 shrink-0" />
-                <span className="text-gray-300">{content.phone}</span>
+                <span className="text-gray-300">{phone}</span>
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 text-[#f05a28] mr-3 shrink-0" />
-                <a href={`mailto:${content.email}`} className="text-gray-300 hover:text-white transition-colors">{content.email}</a>
+                <a href={`mailto:${email}`} className="text-gray-300 hover:text-white transition-colors">{email}</a>
+              </li>
+            </ul>
+
+            <h4 className="text-lg font-bold mt-8 mb-4">Radno vrijeme</h4>
+            <ul className="space-y-2 text-gray-300 text-sm">
+              <li className="flex justify-between">
+                <span>Ponedeljak - Subota:</span>
+                <span className="font-medium text-white">07:00h - 16:00h</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Nedelja:</span>
+                <span className="font-medium text-[#f05a28]">Zatvoreno</span>
               </li>
             </ul>
           </div>
@@ -63,7 +73,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-6">Lokacija</h4>
             <div className="h-48 rounded-xl overflow-hidden">
-              <ContactMap address={content.address} />
+              <ContactMap address={address} />
             </div>
           </div>
 
