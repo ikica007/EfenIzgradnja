@@ -1,92 +1,82 @@
-import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { MapPin, Phone, Mail } from 'lucide-react';
+import ContactMap from '../components/ContactMap';
+import { useContent } from '../hooks/useContent';
 
-export default function Footer() {
+export default function ContactPage() {
+  const address = 'Bulevar Pera Ćetkovića 115, Podgorica, Crna Gora';
+  const phone = '069 170 627';
+  const email = 'efencolor@gmail.com';
+
   return (
-    <footer className="bg-[#111] text-gray-300 py-16 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* O nama */}
-          <div>
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-[#f05a28] rounded-lg flex items-center justify-center">
-                <span className="text-white font-black text-xl">E</span>
+    <div className="pt-32 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen">
+      <div className="text-center mb-16">
+        <h1 className="text-4xl md:text-5xl font-black text-[#111] mb-4">Kontaktirajte nas</h1>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          Tu smo za sva vaša pitanja. Kontaktirajte nas putem telefona, emaila ili nas posjetite na našoj lokaciji.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-center">
+          <h2 className="text-2xl font-bold mb-8">Naše kontakt informacije</h2>
+          
+          <div className="space-y-8">
+            <div className="flex items-start">
+              <div className="bg-orange-50 p-4 rounded-full mr-6">
+                <MapPin className="w-8 h-8 text-[#f05a28]" />
               </div>
-              <span className="text-2xl font-black text-white tracking-tight">
-                EFEN <span className="text-[#f05a28]">IZGRADNJA</span>
-              </span>
+              <div>
+                <h3 className="text-lg font-bold mb-1">Adresa</h3>
+                <p className="text-gray-600 text-lg">{address}</p>
+              </div>
             </div>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              Vaš pouzdan partner za sve vrste građevinskih i završnih radova. Kvalitet, stručnost i poštovanje rokova su naš zaštitni znak.
-            </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#f05a28] hover:text-white transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#f05a28] hover:text-white transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#f05a28] hover:text-white transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
+            
+            <div className="flex items-start">
+              <div className="bg-orange-50 p-4 rounded-full mr-6">
+                <Phone className="w-8 h-8 text-[#f05a28]" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-1">Telefon</h3>
+                <p className="text-gray-600 text-lg">{phone}</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start">
+              <div className="bg-orange-50 p-4 rounded-full mr-6">
+                <Mail className="w-8 h-8 text-[#f05a28]" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-1">Email</h3>
+                <a href={`mailto:${email}`} className="text-gray-600 text-lg hover:text-[#f05a28] transition-colors">{email}</a>
+              </div>
             </div>
           </div>
-
-          {/* Brzi linkovi */}
-          <div>
-            <h4 className="text-white font-bold text-lg mb-6">Brzi Linkovi</h4>
-            <ul className="space-y-3">
-              <li><Link to="/" className="hover:text-[#f05a28] transition-colors">Početna</Link></li>
-              <li><Link to="/o-nama" className="hover:text-[#f05a28] transition-colors">O Nama</Link></li>
-              <li><Link to="/usluge" className="hover:text-[#f05a28] transition-colors">Usluge</Link></li>
-              <li><Link to="/projekti" className="hover:text-[#f05a28] transition-colors">Projekti</Link></li>
-              <li><Link to="/kontakt" className="hover:text-[#f05a28] transition-colors">Kontakt</Link></li>
-            </ul>
+          
+          <div className="mt-8">
+            <a href={`mailto:${email}`} className="inline-flex items-center justify-center px-6 py-3 text-base font-bold rounded-full text-white bg-[#f05a28] hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/30">
+              <Mail className="w-5 h-5 mr-2" />
+              Pošaljite nam email
+            </a>
           </div>
-
-          {/* Usluge */}
-          <div>
-            <h4 className="text-white font-bold text-lg mb-6">Naše Usluge</h4>
-            <ul className="space-y-3">
-              <li className="hover:text-[#f05a28] transition-colors cursor-pointer">Fasaderski radovi</li>
-              <li className="hover:text-[#f05a28] transition-colors cursor-pointer">Dekorativni radovi</li>
-              <li className="hover:text-[#f05a28] transition-colors cursor-pointer">Hidroizolacija</li>
-              <li className="hover:text-[#f05a28] transition-colors cursor-pointer">Suva gradnja</li>
-              <li className="hover:text-[#f05a28] transition-colors cursor-pointer">Prodaja materijala</li>
-            </ul>
-          </div>
-
-          {/* Kontakt */}
-          <div>
-            <h4 className="text-white font-bold text-lg mb-6">Kontakt Info</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-[#f05a28] shrink-0 mt-1" />
-                <span>Bulevar Pera Ćetkovića 115, Podgorica, Crna Gora</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-[#f05a28] shrink-0" />
-                <span>+382 69 123 456</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-[#f05a28] shrink-0" />
-                <span>efenizgradnja@gmail.com</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-[#f05a28] shrink-0 mt-1" />
-                <div>
-                  <p>Pon - Sub: 07:00 - 16:00</p>
-                  <p className="text-gray-500 text-sm">Nedjelja: Zatvoreno</p>
-                </div>
-              </li>
-            </ul>
+          
+          <div className="mt-12 pt-8 border-t border-gray-100">
+            <h3 className="text-lg font-bold mb-4">Radno vrijeme</h3>
+            <div className="flex justify-between text-gray-600 mb-2">
+              <span>Ponedeljak - Subota:</span>
+              <span className="font-medium">7.30h - 20h</span>
+            </div>
+            <div className="flex justify-between text-gray-600">
+              <span>Nedelja:</span>
+              <span className="font-medium text-[#f05a28]">Zatvoreno</span>
+            </div>
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-          <p>&copy; {new Date().getFullYear()} Efen Izgradnja d.o.o. Sva prava zadržana.</p>
+        <div className="h-[500px] lg:h-auto rounded-3xl overflow-hidden border border-gray-200 shadow-sm">
+          <ContactMap address={address} />
         </div>
       </div>
-    </footer>
+    </div>
   );
 }
