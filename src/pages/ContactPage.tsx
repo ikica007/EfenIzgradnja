@@ -4,7 +4,7 @@ import ContactMap from '../components/ContactMap';
 import { useContent } from '../hooks/useContent';
 
 export default function ContactPage() {
-  const address = 'Bulevar Pera Ćetkovića 115, Podgorica, Crna Gora';
+  const address = 'Bulevar Crnogorskih Junaka 100, Cetinje, Crna Gora';
   const phone = '069 170 627';
   const email = 'efencolor@gmail.com';
 
