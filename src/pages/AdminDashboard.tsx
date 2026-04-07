@@ -72,7 +72,8 @@ export default function AdminDashboard() {
   };
 
   if (loading) return <div className="pt-32 text-center">Učitavanje...</div>;
-  if (!user || role !== 'admin') return <Navigate to="/" />;
+  if (!user) return <Navigate to="/admin/login" />;
+  if (role !== 'admin') return <div className="pt-32 text-center">Nemate administratorska prava. Kontaktirajte vlasnika sajta.</div>;
 
   return (
     <div className="pt-32 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen">
@@ -197,7 +198,7 @@ export default function AdminDashboard() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                 <input 
                   type="text" 
-                  value={content.contact?.email || 'info@efenizgradnja.me'} 
+                  value={content.contact?.email === 'info@efenizgradnja.me' ? 'efencolor@gmail.com' : (content.contact?.email || 'efencolor@gmail.com')} 
                   onChange={(e) => setContent({ ...content, contact: { ...content.contact, email: e.target.value } })}
                   className="w-full border border-gray-300 rounded-lg px-4 py-2"
                 />
