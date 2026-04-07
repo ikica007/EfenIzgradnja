@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { auth, db } from '../firebase';
-import { onAuthStateChanged, User, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
+import { onAuthStateChanged, User, signInWithPopup, GoogleAuthProvider, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 interface AuthContextType {
@@ -10,6 +10,8 @@ interface AuthContextType {
   error: string | null;
   clearError: () => void;
   loginWithGoogle: () => Promise<void>;
+  loginWithEmail: (email: string, pass: string) => Promise<void>;
+  registerWithEmail: (email: string, pass: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -25,17 +27,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        // Check if user exists in Firestore, if not create them
         const userRef = doc(db, 'users', currentUser.uid);
         const userSnap = await getDoc(userRef);
         
         if (userSnap.exists()) {
           setRole(userSnap.data().role);
         } else {
-          // Default role is 'user'. The first admin must be bootstrapped via rules or manually.
-          // If the email matches the default admin, we could set it to admin, but let's stick to 'user'
-          // and let the rules handle the actual permission. We'll just store 'user' for now.
-          const initialRole = currentUser.email === 'dobardzicilijas123@gmail.com' ? 'admin' : 'user';
+          // Vlasnik sajta i vi automatski postajete admini
+          const initialRole = (currentUser.email === 'dobardzicilijas123@gmail.com' || currentUser.email === 'efencolor@gmail.com') ? 'admin' : 'user';
           await setDoc(userRef, {
             uid: currentUser.uid,
             email: currentUser.email,
@@ -56,20 +55,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const loginWithGoogle = async () => {
     setError(null);
     const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({
-      prompt: 'select_account'
-    });
+    provider.setCustomParameters({ prompt: 'select_account' });
     try {
       await signInWithPopup(auth, provider);
     } catch (error: any) {
       console.error("Error signing in with Google", error);
-      if (error.code === 'auth/popup-closed-by-user') {
-        setError("Prijava je prekinuta. Molimo vas da ne zatvarate iskačući prozor dok se prijava ne završi.");
-      } else if (error.code === 'auth/cancelled-popup-request') {
-        setError("Više zahtjeva za prijavu je pokrenuto. Molimo pokušajte ponovo.");
-      } else {
-        setError("Došlo je do greške prilikom prijave. Pokušajte ponovo.");
-      }
+      setError("Došlo je do greške prilikom prijave sa Google-om.");
+    }
+  };
+
+  const loginWithEmail = async (email: string, pass: string) => {
+    setError(null);
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+    } catch (error: any) {
+      console.error("Greška pri prijavi", error);
+      setError("Pogrešan email ili lozinka.");
+      throw error;
+    }
+  };
+
+  const registerWithEmail = async (email: string, pass: string) => {
+    setError(null);
+    try {
+      await createUserWithEmailAndPassword(auth, email, pass);
+    } catch (error: any) {
+      console.error("Greška pri registraciji", error);
+      setError("Greška pri registraciji. Možda email već postoji ili je lozinka preslaba.");
+      throw error;
     }
   };
 
@@ -86,7 +99,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const clearError = () => setError(null);
 
   return (
-    <AuthContext.Provider value={{ user, role, loading, error, clearError, loginWithGoogle, logout }}>
+    <AuthContext.Provider value={{ user, role, loading, error, clearError, loginWithGoogle, loginWithEmail, registerWithEmail, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );
