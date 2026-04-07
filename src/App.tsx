@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
@@ -14,6 +9,7 @@ import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminLogin from './pages/AdminLogin';
 
 function ScrollToHash() {
   const { pathname, hash } = useLocation();
@@ -49,6 +45,7 @@ export default function App() {
               <Route path="/o-nama" element={<AboutPage />} />
               <Route path="/kontakt" element={<ContactPage />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
             </Routes>
           </main>
           <Footer />
